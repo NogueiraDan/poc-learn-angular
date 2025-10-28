@@ -1,0 +1,107 @@
+<div class="dashboard">
+      <h1>Dashboard - Bem-vindo ao Angular POC!</h1>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-content">
+            <h3>{{ userService.users().length }}</h3>
+            <p>Usuários Cadastrados</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🎨</div>
+          <div class="stat-content">
+            <h3>{{ themeService.availableThemes().length }}</h3>
+            <p>Temas Disponíveis</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-content">
+            <h3>{{ angularFeatures().length }}</h3>
+            <p>Features Implementadas</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🚀</div>
+          <div class="stat-content">
+            <h3>Angular 20+</h3>
+            <p>Versão Utilizada</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <section class="features-section">
+          <h2>🔥 Features Implementadas</h2>
+          <div class="features-list">
+            @for (feature of angularFeatures(); track feature.name) {
+              <div class="feature-item" [class.implemented]="feature.implemented">
+                <div class="feature-icon">{{ feature.icon }}</div>
+                <div class="feature-content">
+                  <h4>{{ feature.name }}</h4>
+                  <p>{{ feature.description }}</p>
+                  @if (feature.implemented) {
+                    <span class="status implemented">✅ Implementado</span>
+                  } @else {
+                    <span class="status pending">⏳ Em desenvolvimento</span>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </section>
+
+        <section class="quick-actions">
+          <h2>🎯 Ações Rápidas</h2>
+          <div class="actions-list">
+            <button class="action-btn" (click)="goToUsers()">
+              <span class="btn-icon">👥</span>
+              <span>Gerenciar Usuários</span>
+            </button>
+
+            <button class="action-btn" (click)="toggleTheme()">
+              <span class="btn-icon">{{ getThemeIcon() }}</span>
+              <span>Trocar Tema</span>
+            </button>
+
+            <button class="action-btn" (click)="refreshData()">
+              <span class="btn-icon">🔄</span>
+              <span>Atualizar Dados</span>
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <section class="current-theme-info">
+        <h2>🎨 Tema Atual</h2>
+        <div class="theme-preview">
+          <div class="theme-colors">
+            <div
+              class="color-sample primary"
+              [style.background-color]="themeService.currentTheme().primary"
+              title="Cor Primária"
+            ></div>
+            <div
+              class="color-sample secondary"
+              [style.background-color]="themeService.currentTheme().secondary"
+              title="Cor Secundária"
+            ></div>
+            <div
+              class="color-sample background"
+              [style.background-color]="themeService.currentTheme().background"
+              [style.border]="'2px solid ' + themeService.currentTheme().text"
+              title="Cor de Fundo"
+            ></div>
+          </div>
+          <div class="theme-details">
+            <h3>{{ themeService.currentTheme().name }}</h3>
+            <p>Tema selecionado com suporte a CSS custom properties</p>
+          </div>
+        </div>
+      </section>
+    </div>
